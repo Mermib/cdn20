@@ -34,7 +34,7 @@ h1, h2 {
 }
 
 h1 { font-size: 3rem; color: #000068;}
-h2 { font-size: 2.5rem; font-family: 'open_sanssemibold';color: #00425C;}
+h2 { font-size: 2.5rem; font-family: 'open_sanssemibold';color: #00425C;margin: 0 auto 30px;}
 
 .subtitulo { text-align: center; font-size: 2rem; color: #000068;}
 
@@ -47,7 +47,7 @@ h2 { font-size: 2.5rem; font-family: 'open_sanssemibold';color: #00425C;}
 
 section.cdmusic {
     background: transparent linear-gradient(180deg, #E2E0FF 0%, #E0FFFE00 100%) 0% 0% no-repeat padding-box;
-    padding: 30px 0;
+    padding: 30px 0 10px;
     margin: 30px auto;
     width: 100%;
 }
@@ -61,8 +61,13 @@ section.cdmusic {
     color: #00425C;
 }
 
+.tracklist ul {
+    padding: 0;
+}
 .tracklist li {
-    border-bottom:1px solid #FDFDFD;
+    border-bottom: 1px solid #e2e2e2;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .caratula img {
@@ -110,4 +115,56 @@ section.comprar p {
     width: 80%;
     margin: 0 auto;
     display: block;
+}
+
+
+@media (min-width:768px) {
+    h2 {
+        text-align: left;
+        margin: 0 0 30px 5%;
+    }
+    .video iframe {
+        width: 900px;
+        height: 450px;
+        margin: 0 auto;
+        display: block;
+    }
+    .cdn20 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .caratula { width: 30%;}
+    .caratula img {
+        width: 100%;
+    }
+    .tracklist {
+        margin: 0 3%;
+    }
+    .listas {
+        display: flex;
+    }
+    .tracklist ul {
+        padding: 0;
+        margin-right: 20px;
+    }
+
+    section.comprar {
+        position: unset; 
+        background: none;
+        width: unset;
+        box-shadow:none;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    section.comprar p:first-child {
+        margin-right: 40px;
+    }
+    .tracklist li {
+        padding-bottom: 5px;
+    }
+    
 }
