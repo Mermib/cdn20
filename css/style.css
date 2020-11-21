@@ -104,6 +104,9 @@ section.comprar p {
     font-family: 'open_sanssemibold';
 }
 
+section.comprar { display: block ;}
+    
+section.comprardesk { display: none; }
 
 .comprar button {
     border:0;
@@ -149,23 +152,33 @@ section.comprar p {
         margin-right: 20px;
     }
 
-    section.comprar {
-        position: unset; 
-        background: none;
-        width: unset;
-        box-shadow:none;
+    section.comprar { display: none;}
+
+    section.comprardesk {
         padding: 10px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    section.comprar p:first-child {
+    section.comprardesk p:first-child {
         margin-right: 40px;
     }
+    section.comprardesk .precio {
+        display: flex;
+        justify-content: space-around;
+    }
 
-    .comprar button {
+    .comprardesk button {
         width: 220px;
+        border:0;
+        background-color: #00425C;
+        font-size: 1.8rem;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 6px;
+        margin: 0 auto;
+        display: block;
     }
 
     .tracklist li {
