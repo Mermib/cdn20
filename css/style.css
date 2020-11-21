@@ -163,8 +163,17 @@ section.comprar p {
     section.comprar p:first-child {
         margin-right: 40px;
     }
+
+    .comprar button {
+        width: 220px;
+    }
+
     .tracklist li {
         padding-bottom: 5px;
+    }
+
+    .text {
+        margin: 30px 5%;
     }
     
 }
