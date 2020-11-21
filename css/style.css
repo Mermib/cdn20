@@ -1,0 +1,113 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 65%;
+    font-family: 'open_sansregular';
+}
+
+ul, p, li {
+    font-size: 1.6rem;
+    padding-bottom: 15px;
+    font-family: 'open_sansregular';
+    list-style-type: none;
+    color: #00425C;
+}
+
+header {
+    background: grey;
+    height: 100px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'open_sansbold';
+    width: 90%;
+    margin: 0 auto;
+    line-height: 3rem;
+}
+
+h1 { font-size: 3rem; color: #000068;}
+h2 { font-size: 2.5rem; font-family: 'open_sanssemibold';color: #00425C;}
+
+.subtitulo { text-align: center; font-size: 2rem; color: #000068;}
+
+.video iframe {width: 100%;}
+
+.video {
+    width: 90%;
+    margin: 30px auto;
+}
+
+section.cdmusic {
+    background: transparent linear-gradient(180deg, #E2E0FF 0%, #E0FFFE00 100%) 0% 0% no-repeat padding-box;
+    padding: 30px 0;
+    margin: 30px auto;
+    width: 100%;
+}
+
+.tracklist {
+    margin: 30px 10%;
+}
+
+.tracklist p {
+    font-size: 2.5rem;
+    color: #00425C;
+}
+
+.tracklist li {
+    border-bottom:1px solid #FDFDFD;
+}
+
+.caratula img {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+}
+
+.img img {
+    width: 100%;
+}
+
+.text {margin: 10% 5%;}
+
+section.comprar {
+    position: fixed;
+    bottom: 0;
+    background: white;
+    width: 100%;
+    height: 104px;
+    box-shadow: 3px -3px 6px #00000029;
+    padding: 10px 0;
+}   
+
+section.comprar .precio {
+    display: flex;
+    justify-content: space-around;
+}
+
+section.comprar p {
+    color: #00425C;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-family: 'open_sanssemibold';
+}
+
+
+.comprar button {
+    border:0;
+    background-color: #00425C;
+    font-size: 1.8rem;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+}
