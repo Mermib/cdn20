@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/fonts.css" rel="stylesheet">
+        <script src="js/vue.min.js"></script>
+        <script src="js/axios.min.js"></script>
     </head>
     <body>
         <header>
@@ -52,11 +54,14 @@
                             </ul>
                         </div>  
                         <section class="comprardesk">
-                            <div class="precio">
-                                <p>Precio:</p>
-                                <p>$100</p>
+                            <div id="product-price">
+                                <div class="precio">
+                                    <p>Precio: $</p>
+                                        <input type="number" v-model.number="price">
+                                    <!--p>$100</p-->
+                                </div>
+                                    <button @click="buyProduct">Compra Digital</button>
                             </div>
-                            <button>Compra Digital</button>
                         </section>                      
                     </div>
                 </div>                
@@ -94,8 +99,45 @@
                 <p>Precio:</p>
                 <p>$100</p>
             </div>
-            <button>Compra Digital</button>
+                <button>Compra Digital</button>
         </section>  
+
+        <script>
+
+            new Vue({
+              el: '#product-price',
+              data: {
+                price: 100,
+              },
+              methods: {
+                    buyProduct: function () {
+                        let priceProduct = parseFloat(this.price);
+                        if(priceProduct < 100 || isNaN(priceProduct))
+                        {
+                            alert('El monto es menor que 100');
+                        }
+                        else
+                        {
+                            axios.post('http://new.cdn20.com/payment.php', JSON.stringify({ price: priceProduct }), {
+                                headers: {}
+                            })
+                            .then((response) => {
+                                if(response.data.status){
+                                    window.location.href = response.data.message;
+                                }
+                                else{
+                                    alert(response.data.message);
+                                }
+                            })
+                            .catch((ex) => {
+                                console.log(ex.message);
+                            })
+                        }
+                    }
+                }
+            })
+            
+            </script>
         
     </body>
 </html>

@@ -190,3 +190,7 @@ section.comprardesk { display: none; }
     }
     
 }
+
+.paypal-link{
+    text-decoration: none;
+}
