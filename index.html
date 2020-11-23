@@ -60,7 +60,14 @@
                                         <input type="number" v-model.number="price">
                                     <!--p>$100</p-->
                                 </div>
-                                    <button @click="buyProduct">Compra Digital</button>
+                                    <button @click="buyProduct">
+                                        <div class="spinner">
+                                            <div class="bounce1" v-if="spinner"></div>
+                                            <div class="bounce2" v-if="spinner"></div>
+                                            <div class="bounce3" v-if="spinner"></div>
+                                            <span class="lbl-btn" v-else>Compra Digital</span>
+                                      </div>
+                                    </button>
                             </div>
                         </section>                      
                     </div>
@@ -108,18 +115,18 @@
               el: '#product-price',
               data: {
                 price: 100,
+                spinner: false
               },
               methods: {
                     buyProduct: function () {
+                        this.spinner = true;
                         let priceProduct = parseFloat(this.price);
-                        if(priceProduct < 100 || isNaN(priceProduct))
-                        {
-                            alert('El monto es menor que 100');
+                        if(priceProduct < 100 || isNaN(priceProduct)){
+                            alert('El monto minimo son $100.00');
+                            this.spinner = false;
                         }
-                        else
-                        {
+                        else{
                             axios.post('http://new.cdn20.com/payment.php', JSON.stringify({ price: priceProduct }), {
-                                headers: {}
                             })
                             .then((response) => {
                                 if(response.data.status){
@@ -127,17 +134,18 @@
                                 }
                                 else{
                                     alert(response.data.message);
+                                    this.spinner = false;
                                 }
                             })
                             .catch((ex) => {
                                 console.log(ex.message);
+                                this.spinner = false;
                             })
                         }
                     }
                 }
             })
             
-            </script>
-        
+        </script>
     </body>
 </html>

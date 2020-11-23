@@ -9,13 +9,14 @@ if(isset($_GET['paymentId']) && isset($_GET['PayerID']))
 {
     $payerId = $_GET['PayerID'];
     $paymentId = $_GET['paymentId'];
-    $code = Paypal::CreatePayment($paymentId, $payerId);
+    $code = Paypal::ExecutePayment($paymentId, $payerId);
 }
-echo $code;
-/*if(empty($code))
+
+if(empty($code))
 {
-    header('Location: http://new.cdn20.com');
-}*/
+    header('Location: http://new.cdn20.com/error.html');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +36,8 @@ echo $code;
             <h1>¡Muchas Gracias!</h1>
 
             <div class="text">
-                <p>Tu apoyo es muy importante para nosotros, disfruta la música!.</p>         
+                <p>Tu apoyo es muy importante para nosotros, disfruta la música!.</p>
+                    <a href="https://www.dropbox.com/sh/at57o2p21l993rl/AAB43_AOAd0S2QLHeOnQNMjva/MUSICA?dl=0&subfolder_nav_tracking=1" target="_blank"><button>Descargar</button></a>         
             </div>
         </main>
     </body>
