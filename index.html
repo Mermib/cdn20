@@ -54,7 +54,7 @@
                             </ul>
                         </div>  
                         <section class="comprardesk">
-                            <div class="product-price">
+                            <div id="product-price">
                                 <div class="precio">
                                     <p>Precio: $</p>
                                         <input type="number" v-model.number="price">
@@ -102,7 +102,7 @@
             </div>
         </main>
         <section class="comprar">
-          <div class="product-price">
+          <div id="product-price-m">
                                 <div class="precio">
                                     <p>Precio: $</p>
                                         <input type="number" v-model.number="price">
@@ -127,7 +127,42 @@
         <script>
 
             new Vue({
-              el: '.product-price',
+              el: '#product-price',
+              data: {
+                price: 100,
+                spinner: false
+              },
+              methods: {
+                    buyProduct: function () {
+                        this.spinner = true;
+                        let priceProduct = parseFloat(this.price);
+                        if(priceProduct < 100 || isNaN(priceProduct)){
+                            alert('El monto minimo son $100.00');
+                            this.spinner = false;
+                        }
+                        else{
+                            axios.post('http://new.cdn20.com/payment.php', JSON.stringify({ price: priceProduct }), {
+                            })
+                            .then((response) => {
+                                if(response.data.status){
+                                    window.location.href = response.data.message;
+                                }
+                                else{
+                                    alert(response.data.message);
+                                    this.spinner = false;
+                                }
+                            })
+                            .catch((ex) => {
+                                console.log(ex.message);
+                                this.spinner = false;
+                            })
+                        }
+                    }
+                }
+            })
+
+            new Vue({
+              el: '#product-price-m',
               data: {
                 price: 100,
                 spinner: false
