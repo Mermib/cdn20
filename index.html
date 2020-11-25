@@ -164,12 +164,12 @@
         <script>
 
             new Vue({
-              el: '#product-price',
-              data: {
+            el: '#product-price',
+            data: {
                 price: 100,
                 spinner: false
-              },
-              methods: {
+            },
+            methods: {
                     buyProduct: function () {
                         this.spinner = true;
                         let priceProduct = parseFloat(this.price);
@@ -178,7 +178,7 @@
                             this.spinner = false;
                         }
                         else{
-                            axios.post('http://new.cdn20.com/payment.php', JSON.stringify({ price: priceProduct }), {
+                            axios.post('/payment.php', JSON.stringify({ price: priceProduct }), {
                             })
                             .then((response) => {
                                 if(response.data.status){
@@ -199,12 +199,12 @@
             })
 
             new Vue({
-              el: '#product-price-m',
-              data: {
+            el: '#product-price-m',
+            data: {
                 price: 100,
                 spinner: false
-              },
-              methods: {
+            },
+            methods: {
                     buyProduct: function () {
                         this.spinner = true;
                         let priceProduct = parseFloat(this.price);
@@ -213,7 +213,7 @@
                             this.spinner = false;
                         }
                         else{
-                            axios.post('http://new.cdn20.com/payment.php', JSON.stringify({ price: priceProduct }), {
+                            axios.post('/payment.php', JSON.stringify({ price: priceProduct }), {
                             })
                             .then((response) => {
                                 if(response.data.status){
