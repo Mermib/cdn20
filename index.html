@@ -54,7 +54,7 @@
                             </ul>
                         </div>  
                         <section class="comprardesk">
-                            <div id="product-price">
+                            <div class="product-price">
                                 <div class="precio">
                                     <p>Precio: $</p>
                                         <input type="number" v-model.number="price">
@@ -102,17 +102,32 @@
             </div>
         </main>
         <section class="comprar">
-            <div class="precio">
+          <div class="product-price">
+                                <div class="precio">
+                                    <p>Precio: $</p>
+                                        <input type="number" v-model.number="price">
+                                    <!--p>$100</p-->
+                                </div>
+                                    <button @click="buyProduct">
+                                        <div class="spinner">
+                                            <div class="bounce1" v-if="spinner"></div>
+                                            <div class="bounce2" v-if="spinner"></div>
+                                            <div class="bounce3" v-if="spinner"></div>
+                                            <span class="lbl-btn" v-else>Compra Digital</span>
+                                      </div>
+                                    </button>
+                            </div>
+            <!--div class="precio">
                 <p>Precio:</p>
                 <p>$100</p>
             </div>
                 <button>Compra Digital</button>
-        </section>  
+        </section-->  
 
         <script>
 
             new Vue({
-              el: '#product-price',
+              el: '.product-price',
               data: {
                 price: 100,
                 spinner: false
