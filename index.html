@@ -10,23 +10,36 @@
         <script src="js/axios.min.js"></script>
     </head>
     <body>
-        <header>
-            <img src="" alt="">
+        <header>        
+            <nav class="topnav container">    
+                <div class="logo">
+                    <object type="image/svg+xml" data="img/logo.svg" width="160" style="margin: 4px 0;"></object>
+                </div>
+                <ul id="myLinks">
+                    <li><a href="#musica">CD Música</a></li>
+                    <li><a href="#iniciativa">Iniciativa</a></li>
+                    <li><a href="#donativos">Donativos</a></li>
+                </ul>
+                <a href="javascript:void(0);" class="icon mobile" onclick="myFunction()" style="display: none;">
+                    <img src="img/bars-solid.png" alt="" width="30">
+                </a>
+            </nav>      
         </header>
+
         <main>
             <h1>Artistas destacados en su género</h1>
-            <p class="subtitulo">Texto de subtítulo test</p>
+            <!--<p class="subtitulo">Texto de subtítulo test</p>-->
             <div class="video">
                 <iframe src="https://player.vimeo.com/video/446694307?color=ffffff" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
 
-            <section class="cdmusic">
+            <section id="musica" class="cdmusic myLinks">
                 <h2>Recopilación N20</h2>
                 <div class="cdn20">
                     <div class="caratula">
                         <picture>
-                            <source srcset="img/caratula.jpeg" width="360" media="(min-width: 768px)">
-                            <img src="img/caratula.jpeg" alt="">
+                            <source srcset="img/caratula.jpg" width="360" media="(min-width: 768px)">
+                            <img src="img/caratula.jpg" alt="">
                         </picture>
                     </div>
                     <div class="tracklist">
@@ -52,8 +65,8 @@
                                 <li>15. Mi humilde oración</li>
                                 <li>16. Feliz Navidad</li>
                             </ul>
-                        </div>  
-                        <section class="comprardesk">
+                        </div>     
+                        <section class="comprardesk myLinks" id="donativos">
                             <div id="product-price">
                                 <div class="precio">
                                     <p>Precio: $</p>
@@ -69,7 +82,7 @@
                                       </div>
                                     </button>
                             </div>
-                        </section>                      
+                        </section>                          
                     </div>
                 </div>                
             </section>
@@ -81,7 +94,7 @@
                 </picture>
             </div>
 
-            <div class="text">
+            <div id="iniciativa" class="text myLinks">
                 <p>NL20 es una iniciativa que nació con la idea de apoyar a un grupo de cantantes y músicos, 
                 quienes durante el 2020 vieron afectada su actividad profesional, al quedar suspendidos todos los 
                 eventos culturales y de recreación social en el país.</p>
@@ -102,27 +115,51 @@
             </div>
         </main>
         <section class="comprar">
-          <div id="product-price-m">
-                                <div class="precio">
-                                    <p>Precio: $</p>
-                                        <input type="number" v-model.number="price">
-                                    <!--p>$100</p-->
-                                </div>
-                                    <button @click="buyProduct">
-                                        <div class="spinner">
-                                            <div class="bounce1" v-if="spinner"></div>
-                                            <div class="bounce2" v-if="spinner"></div>
-                                            <div class="bounce3" v-if="spinner"></div>
-                                            <span class="lbl-btn" v-else>Compra Digital</span>
-                                      </div>
-                                    </button>
-                            </div>
-            <!--div class="precio">
-                <p>Precio:</p>
-                <p>$100</p>
+            <div id="product-price-m">
+                                  <div class="precio">
+                                      <p>Precio: $</p>
+                                          <input type="number" v-model.number="price">
+                                      <!--p>$100</p-->
+                                  </div>
+                                      <button @click="buyProduct">
+                                          <div class="spinner">
+                                              <div class="bounce1" v-if="spinner"></div>
+                                              <div class="bounce2" v-if="spinner"></div>
+                                              <div class="bounce3" v-if="spinner"></div>
+                                              <span class="lbl-btn" v-else>Compra Digital</span>
+                                        </div>
+                                      </button>
+                              </div>
+              <!--div class="precio">
+                  <p>Precio:</p>
+                  <p>$100</p>
+              </div>
+                  <button>Compra Digital</button>-->
+          </section>  
+
+        <footer>
+            <h4>Patrocinadores</h4>
+            <div class="patrocinadores">
+                <img src="img/consejodenuevoleon.png" width="155" alt="Logo Consejo de nuevo leon">
+                <img src="img/buenavista.png" width="155" alt="Logo Buenavista">
+                <img src="img/grazzia-records.png" width="155" alt="Logo Grazzia Records">
+                <img src="img/telopresenta.png" width="155"  alt="Logo Telopresenta">
+                <img src="img/cemex.png" width="155" alt="Logo Cemex">
+                <img src="img/hey-banco.png" width="155"  alt="Logo Hey banco">
+                <img src="img/NETFLIX.png" width="155"  alt="Logo Netflix">
             </div>
-                <button>Compra Digital</button>
-        </section-->  
+        </footer>
+
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myLinks");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        </script>
 
         <script>
 
