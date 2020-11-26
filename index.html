@@ -68,21 +68,7 @@
                             </ul>
                         </div>     
                         <section class="comprardesk myLinks" id="donativos">
-                            <div id="product-price">
-                                <div class="precio">
-                                    <p>Precio: $</p>
-                                        <input type="number" v-model.number="price">
-                                    <!--p>$100</p-->
-                                </div>
-                                    <button @click="buyProduct">
-                                        <div class="spinner">
-                                            <div class="bounce1" v-if="spinner"></div>
-                                            <div class="bounce2" v-if="spinner"></div>
-                                            <div class="bounce3" v-if="spinner"></div>
-                                            <span class="lbl-btn" v-else>Compra Digital</span>
-                                      </div>
-                                    </button>
-                            </div>
+                            <buy-product></buy-product>
                         </section>                          
                     </div>
                 </div>                
@@ -110,27 +96,8 @@
                  ¡Muchas gracias!</p>            
             </div>
         </main>
-        <section class="comprar">
-            <div id="product-price-m">
-                                  <div class="precio">
-                                      <p>Precio: $</p>
-                                          <input type="number" v-model.number="price">
-                                      <!--p>$100</p-->
-                                  </div>
-                                      <button @click="buyProduct">
-                                          <div class="spinner">
-                                              <div class="bounce1" v-if="spinner"></div>
-                                              <div class="bounce2" v-if="spinner"></div>
-                                              <div class="bounce3" v-if="spinner"></div>
-                                              <span class="lbl-btn" v-else>Compra Digital</span>
-                                        </div>
-                                      </button>
-                              </div>
-              <!--div class="precio">
-                  <p>Precio:</p>
-                  <p>$100</p>
-              </div>
-                  <button>Compra Digital</button>-->
+        <section class="comprar" id="donativos-mobile">
+            <buy-product></buy-product>
           </section>  
 
         <footer>
@@ -159,13 +126,14 @@
 
         <script>
 
-            new Vue({
-            el: '#product-price',
-            data: {
-                price: 100,
-                spinner: false
-            },
-            methods: {
+            Vue.component('buy-product', {
+                data: function () {
+                    return {
+                        price: 100,
+                        spinner: false
+                    }
+                },
+                methods: {
                     buyProduct: function () {
                         this.spinner = true;
                         let priceProduct = parseFloat(this.price);
@@ -191,43 +159,25 @@
                             })
                         }
                     }
-                }
+                },
+                template: `<div>
+                            <div class="precio">
+                                <p>Precio: $</p>
+                                <input type="number" v-model.number="price">
+                            </div>
+                            <button @click="buyProduct">
+                                <div class="spinner" v-if="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                                <span class="lbl-btn" v-else>Compra Digital</span>
+                            </button>
+                        </div>`
             })
 
-            new Vue({
-            el: '#product-price-m',
-            data: {
-                price: 100,
-                spinner: false
-            },
-            methods: {
-                    buyProduct: function () {
-                        this.spinner = true;
-                        let priceProduct = parseFloat(this.price);
-                        if(priceProduct < 100 || isNaN(priceProduct)){
-                            alert('El monto minimo son $100.00');
-                            this.spinner = false;
-                        }
-                        else{
-                            axios.post('/payment.php', JSON.stringify({ price: priceProduct }), {
-                            })
-                            .then((response) => {
-                                if(response.data.status){
-                                    window.location.href = response.data.message;
-                                }
-                                else{
-                                    alert(response.data.message);
-                                    this.spinner = false;
-                                }
-                            })
-                            .catch((ex) => {
-                                console.log(ex.message);
-                                this.spinner = false;
-                            })
-                        }
-                    }
-                }
-            })
+            new Vue({el: '#donativos'})
+            new Vue({el: '#donativos-mobile'})
             
         </script>
     </body>
