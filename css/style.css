@@ -19,9 +19,19 @@ ul, p, li {
 
 header {
     background: #002A3B;
-    height: 65px;
+    height: 80px;
     width: 100%;
     margin-bottom: 30px;
+    width: 100%;
+    z-index: 99;
+    position: fixed;
+    top: 0px;
+}
+
+main {
+    position: relative;
+    top: 100px;
+    margin-bottom: 100px;
 }
 
 h1, h2, h4 {
@@ -33,21 +43,15 @@ h1, h2, h4 {
     line-height: 3rem;
 }
 
-h1, footer h4 { font-size: 3rem; color: #000068;}
-h2 { font-size: 2.5rem; font-family: 'open_sanssemibold';color: #00425C;margin: 0 auto 30px;}
-h4 { margin-bottom: 30px;}
+h1, h2 { font-size: 2.4rem; color: #000068;}
+h2 { margin-bottom: 30px;}
+/*h2 { font-size: 2.5rem; font-family: 'open_sanssemibold';color: #00425C;margin: 0 auto 30px;}*/
+h4 { margin-bottom: 30px; color:#707070; font-size: 3rem;}
 
 /* Header */
 
-.logo { display: flex; justify-content: flex-start;  align-items: center; height: 65px;  padding-left: 15px;}
+.logo { display: flex; justify-content: center;  align-items: center; padding-top: 13px;}
 
-header nav {
-    width: 100%;
-    z-index: 99;
-    position: fixed;
-    top: 0px;
-    background: #002A3B;
-}
 
 nav.topnav a.logo {
     margin-left: 15px;
@@ -116,10 +120,11 @@ nav.topnav #myLinks a:hover, nav.topnav #myLinks a:active, nav.topnav #myLinks a
 }
 
 section.cdmusic {
-    background: transparent linear-gradient(180deg, #E2E0FF 0%, #E0FFFE00 100%) 0% 0% no-repeat padding-box;
+    background: #e8e8e8;
     padding: 30px 0 10px;
-    margin: 30px auto;
+    margin: 30px auto 30px;
     width: 100%;
+    /*max-width: 1400px;*/
 }
 
 .tracklist {
@@ -146,11 +151,29 @@ section.cdmusic {
     display: block;
 }
 
+.img { position: relative;}
+
 .img img {
     width: 100%;
 }
 
+.iniciativa {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 40%;
+    bottom: 0;
+    color:white;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'open_sanssemibold';
+}
+
 .text {margin: 10% 5%;}
+
+.text p {
+    color:#707070
+}
 
 #product-price {
     display: flex;
@@ -166,6 +189,7 @@ section.comprar {
     height: 104px;
     box-shadow: 3px -3px 6px #00000029;
     padding: 10px 0;
+    z-index: 9999;
 }   
 
 section.comprar .precio {
@@ -206,7 +230,10 @@ section.comprardesk { display: none; }
 }
 
 footer {
-    margin-bottom: 35%;
+    margin-bottom: 30%;
+    background: #e8e8e8;
+    padding: 30px 0;
+
 }
 
 .patrocinadores {
@@ -228,9 +255,25 @@ footer {
     .mobile {
         display:none!important;
     }
+    
+    
+    header {
+        position: relative;
+    }
+
+    main {
+        position: relative;
+        top: 0;
+        margin-bottom: 0;
+    }
+
+    .logo {justify-content: center;}
+
+    h1, h2 { font-size: 3rem; }
+
     h2 {
-        text-align: left;
-        margin: 0 0 30px 5%;
+        text-align: center;
+        margin: 0 auto 30px;
     }
     .video iframe {
         width: 900px;
@@ -241,6 +284,7 @@ footer {
     .cdn20 {
         display: flex;
         justify-content: center;
+        padding-bottom: 30px;
     }
 
     .caratula { width: 30%;}
@@ -294,6 +338,7 @@ footer {
     .text {
         margin: 30px 5%;
     }
+    
     header nav, nav.topnav #myLinks {
         display: flex;
     }
@@ -334,6 +379,7 @@ footer {
         margin: 0;
         padding: 0;
         justify-content: flex-end;
+        width:auto;
     }
 
     nav.topnav #myLinks li {
@@ -353,10 +399,6 @@ footer {
         color: #00425c;
         width: 120px;
     }
-    
-    footer {
-        margin-bottom: 50px;
-    }
 
     .patrocinadores {
         display: flex;
@@ -367,6 +409,9 @@ footer {
     
     .patrocinadores img {
         margin-bottom: 15px;
+    }
+    footer {
+        margin:0
     }
 }
 
