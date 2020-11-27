@@ -55,7 +55,7 @@ Class Bd
         $creation = new DateTime();
         $expiration = new DateTime();
         $creation = $creation->format('Y-m-d H:i:s');
-        $expiration = $expiration->add(new DateInterval('P0Y0M0DT0H5M'))->format('Y-m-d H:i:s');
+        $expiration = $expiration->add(new DateInterval('P0Y0M0DT0H30M'))->format('Y-m-d H:i:s');
         $ip = self::get_client_ip();
         $query = "INSERT INTO download_links(authorization, creation_date, expiration_date, client_ip, guid) values(?, '$creation', '$expiration', '$ip', UUID())";
         $response = $conn->prepare($query);
