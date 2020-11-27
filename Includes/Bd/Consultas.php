@@ -49,41 +49,65 @@ Class Bd
         return $ipaddress['ip'];
     }
 
-    public static function saveData()
+    public static function saveData($auth)
     {
         $conn = self::Connection();
-        $auth = 'qwerty';
         $creation = new DateTime();
-        $expiration = $creation->add(new DateInterval('P0Y0M0DT0H5M'));
+        $expiration = new DateTime();
         $creation = $creation->format('Y-m-d H:i:s');
-        $expiration = $expiration->format('Y-m-d H:i:s');
+        $expiration = $expiration->add(new DateInterval('P0Y0M0DT0H5M'))->format('Y-m-d H:i:s');
         $ip = self::get_client_ip();
-        $query = "INSERT INTO download_links(authorization, creation_date, expiration_date, client_ip, guid) values('$auth', '$creation', '$expiration', '$ip', UUID())";
+        $query = "INSERT INTO download_links(authorization, creation_date, expiration_date, client_ip, guid) values(?, '$creation', '$expiration', '$ip', UUID())";
         $response = $conn->prepare($query);
+        $response->bindParam(1, $auth);
         return $response->execute();
     }
 
-    public static function getData()
+    public static function getUrl($auth)
     {
         $conn = self::Connection();
-        $query = "SELECT * FROM download_links";
+        $query = "SELECT * FROM download_links WHERE authorization = ?";
         $response = $conn->prepare($query);
+        $response->bindParam(1, $auth);
         $response->execute();
-        $data = [];
+        $guid = '';
         
         while($row = $response->fetch())
         {
-            $data[] = [
-                'id' => $row['id'],
-                'authorization' => $row['authorization'],
-                'creationDate' => $row['creation_date'],
-                'expirationDate' => $row['expiration_date'],
-                'clientIp' => $row['client_ip'],
-                'guid' => $row['guid']
-            ]; 
+            $guid = $row['guid'];
         }
-        return $data;
+        return $guid;
+    }
+
+    public static function getBuy($code)
+    {
+        $conn = self::Connection();
+        $query = "SELECT * FROM download_links WHERE guid = ?";
+        $response = $conn->prepare($query);
+        $response->bindParam(1, $code);
+        $response->execute();
+        $row = $response->fetch();
+        $validate = new Datetime();
+        $expiration = '';
+        $ip = self::get_client_ip();
+        
+        if($row)
+        {
+            $expiration = new Datetime($row['expiration_date']);
+            return $expiration >= $validate && $ip == $row['client_ip'] && $row['used'] == '0';
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static function changeStatus($id)
+    {
+        $conn = self::Connection();
+        $query = "UPDATE download_links SET used = 1 WHERE guid = ?";
+        $response = $conn->prepare($query);
+        $response->bindParam(1, $id);
+        return $response->execute();
     }
 }
-
-var_dump(Bd::saveData());

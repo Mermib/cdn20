@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2020 a las 00:21:23
+-- Tiempo de generación: 27-11-2020 a las 06:28:04
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.3.22
 
@@ -33,19 +33,17 @@ CREATE TABLE `download_links` (
   `creation_date` datetime NOT NULL,
   `expiration_date` datetime NOT NULL,
   `client_ip` varchar(30) NOT NULL,
-  `guid` varchar(50) NOT NULL
+  `guid` varchar(50) NOT NULL,
+  `used` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `download_links`
 --
 
-INSERT INTO `download_links` (`id`, `authorization`, `creation_date`, `expiration_date`, `client_ip`, `guid`) VALUES
-(1, 'ybg54rdfs236hbg10', '2020-11-26 14:10:45', '2020-11-26 14:15:45', '189.176.16.58', 'b76b721f-301d-11eb-91ea-7c8ae14076e6'),
-(2, 'qwerty', '2020-11-26 20:45:45', '2020-11-26 21:00:00', '127.0.0.1', ''),
-(3, 'qwerty', '2020-11-26 20:45:45', '2020-11-26 21:00:00', '127.0.0.1', ''),
-(4, 'qwerty', '2020-11-26 20:45:45', '2020-11-26 21:00:00', '127.0.0.1', 'dacc39e4-3039-11eb-b8f8-7c8ae14076e6'),
-(5, 'qwerty', '2020-11-26 18:24:41', '2020-11-26 18:24:41', '127.0.0.1', 'dc6cf129-303d-11eb-b8f8-7c8ae14076e6');
+INSERT INTO `download_links` (`id`, `authorization`, `creation_date`, `expiration_date`, `client_ip`, `guid`, `used`) VALUES
+(1, '1XG19764BF102810C', '2020-11-27 00:20:00', '2020-11-27 00:25:00', '127.0.0.1', '328835d9-3070-11eb-843c-7c8ae14076e6', 1),
+(2, '2C441452AE441500B', '2020-11-27 00:26:15', '2020-11-27 00:31:15', '127.0.0.1', '11ac8323-3071-11eb-843c-7c8ae14076e6', 1);
 
 --
 -- Índices para tablas volcadas
@@ -55,7 +53,9 @@ INSERT INTO `download_links` (`id`, `authorization`, `creation_date`, `expiratio
 -- Indices de la tabla `download_links`
 --
 ALTER TABLE `download_links`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `guid` (`guid`),
+  ADD UNIQUE KEY `authorization` (`authorization`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -65,7 +65,7 @@ ALTER TABLE `download_links`
 -- AUTO_INCREMENT de la tabla `download_links`
 --
 ALTER TABLE `download_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
