@@ -49,7 +49,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title></title>
+        <title>N20 - Gracias</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
@@ -59,25 +59,20 @@ else
     </head>
     <body>
         <header>        
-                <nav class="topnav container">    
-                    <div class="logo">
-                        <object type="image/svg+xml" data="img/logo.svg" width="160" style="margin: 4px 0;"></object>
-                    </div>
-                    <ul id="myLinks" style="display:none">
-                        <li><a href="#musica">CD Música</a></li>
-                        <li><a href="#iniciativa">Iniciativa</a></li>
-                        <li><a href="#donativos">Donativos</a></li>
-                    </ul>
-                    <a href="javascript:void(0);" class="icon mobile" onclick="myFunction()" style="display: none;">
-                        <img src="img/bars-solid.png" alt="" width="30">
-                    </a>
-                </nav>      
+            <nav class="topnav container">    
+                <div class="logo">
+                    <img src="img/logo.png" width="110" alt="Logotipo N20">
+                </div>
+            </nav>      
         </header>
         <main>
             <h1>¡Muchas Gracias!</h1>
 
             <div class="text">
                 <p>Tu apoyo es muy importante para nosotros, disfruta la música!.</p>
+                <p>Disfruta de este CD digital descargandolo en el siguiente link</p>
+            
+            <p><small style="font-size: 10px;">*Link limitado a un solo uso. Dispones de 30 minutos a partir de ahora para descargar el CD</small></p>
                     <!--a href="/audio/test.zip" target="_blank"><button>Descargar</button></a-->
                     <?php echo "<a href='$temporalUrl'>$temporalUrl</a>" ; ?>         
             </div>
