@@ -49,6 +49,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <!--<?php echo Bd::get_client_ip(); ?>-->
         <title>N20 - Gracias</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
