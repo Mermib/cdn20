@@ -87,14 +87,10 @@ Class Bd
         $response->bindParam(1, $code);
         $response->execute();
         $row = $response->fetch();
-        $validate = new Datetime();
-        $expiration = '';
-        $ip = self::get_client_ip();
         
         if($row)
         {
-            $expiration = new Datetime($row['expiration_date']);
-            return $expiration >= $validate && $ip == $row['client_ip'] && $row['used'] == '0';
+            return $row['used'] == '0';
         }
         else
         {
