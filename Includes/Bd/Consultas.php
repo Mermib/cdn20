@@ -1,6 +1,7 @@
 <?php
 
 date_default_timezone_set('America/Cancun');
+require_once(__DIR__ . '/../Config.php');
 
 Class Bd
 {
@@ -8,8 +9,8 @@ Class Bd
     {
         try
         {
-            $cadena = sprintf('mysql:host=%s;dbname=%s', '127.0.0.1', 'nl20');
-            $connection = new PDO($cadena, 'root', '');
+            $cadena = sprintf('mysql:host=%s;dbname=%s', DB_HOST, DB_NAME);
+            $connection = new PDO($cadena, DB_USER, DB_PASS);
             return $connection;
         }
         catch(Exception $ex)
@@ -18,7 +19,7 @@ Class Bd
         }
     }
 
-    function get_client_ip() 
+    public static function get_client_ip() 
     {
         $ipaddress = array();
         if (getenv('HTTP_CLIENT_IP'))

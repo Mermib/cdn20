@@ -77,6 +77,18 @@ else
                     <!--a href="/audio/test.zip" target="_blank"><button>Descargar</button></a-->
                     <?php echo "<a href='$temporalUrl'>$temporalUrl</a>" ; ?>         
             </div>
+            <div id="email-container">
+                <span>Ingresa tu correo</span>
+                <input type="email" v-model="email">
+                <button @click="sendMail">
+                    <div class="spinner" v-if="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                    <span class="lbl-btn" v-else>Enviar</span>
+                </button>
+            </div>
         </main>
         <footer>
             <h4>Patrocinadores</h4>
@@ -90,6 +102,40 @@ else
                 <img src="img/NETFLIX.png" width="155"  alt="Logo Netflix">
             </div>
         </footer>
+        <script>
+            new Vue({
+                el: '#email-container',
+                data: {
+                    email: '',
+                    link: "<?php echo sprintf("<a href='%s'>%s</a>", $temporalUrl, $temporalUrl); ?>",
+                    spinner: false,
+                    reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+                },
+                methods: {
+                    sendMail: function () {
+                        this.spinner = true;
 
+                        if(this.email === null || this.email === '' || !this.reg.test(this.email))
+                        {
+                            alert('El correo es invalido');
+                            this.spinner = false;
+                        }
+                        else
+                        {
+                            axios.post('/sendMail.php', JSON.stringify({ email: this.email, link: this.link }), {
+                            })
+                            .then((response) => {
+                                alert(response.data.message);
+                                this.spinner = false;
+                            })
+                            .catch((ex) => {
+                                console.log(ex.message);
+                                this.spinner = false;
+                            })
+                        }
+                    }
+                }
+            })
+        </script>
     </body>
 </html>
