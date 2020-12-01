@@ -74,7 +74,6 @@ else
                 <p>Disfruta de este CD digital descargandolo en el siguiente link</p>
             
             <p><small style="font-size: 10px;">*Link limitado a un solo uso. Dispones de 30 minutos a partir de ahora para descargar el CD</small></p>
-                    <!--a href="/audio/test.zip" target="_blank"><button>Descargar</button></a-->
                     <?php echo "<a href='$temporalUrl'>$temporalUrl</a>" ; ?>         
             </div>
             <div id="email-container">
@@ -107,7 +106,7 @@ else
                 el: '#email-container',
                 data: {
                     email: '',
-                    link: "<?php echo sprintf("<a href='%s'>%s</a>", $temporalUrl, $temporalUrl); ?>",
+                    link: '<?php echo $temporalUrl; ?>',
                     spinner: false,
                     reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
                 },
@@ -127,6 +126,10 @@ else
                             .then((response) => {
                                 alert(response.data.message);
                                 this.spinner = false;
+                                if(response.data.status)
+                                {
+                                    this.email = '';
+                                }
                             })
                             .catch((ex) => {
                                 console.log(ex.message);

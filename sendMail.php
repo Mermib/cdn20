@@ -7,6 +7,15 @@ require_once(__DIR__ . '/Includes/PHPMailer/src/PHPMailer.php');
 require_once(__DIR__ . '/Includes/PHPMailer/src/SMTP.php');
 require_once(__DIR__ . '/Includes/PHPMailer/src/PHPMailer.php');
 require_once(__DIR__ . '/Includes/Config.php');
+require_once(__DIR__ . '/Includes/Bd/Consultas.php');
+
+function LinkIsUsed($link)
+{
+    $query = parse_url($link, PHP_URL_QUERY);
+    parse_str($query);
+    $notUsed = Bd::getBuy($id);
+    return $notUsed;
+}
 
 function SendMail($email, $link)
 {
@@ -36,28 +45,38 @@ $json = json_decode(file_get_contents('php://input'), true);
 $email = $json['email'];
 $link = $json['link'];
 
-if(filter_var($email, FILTER_VALIDATE_EMAIL))
+if(LinkIsUsed($link))
 {
-    $send = SendMail($email, $link);
-    if($send)
+    if(filter_var($email, FILTER_VALIDATE_EMAIL))
     {
-        echo (json_encode([
-            'status' => true,
-            'message' => 'Se envio correctamente el correo a '. $email
-        ]));
+        $send = SendMail($email, $link);
+        if($send)
+        {
+            echo (json_encode([
+                'status' => true,
+                'message' => 'Se envio correctamente el correo'
+            ]));
+        }
+        else
+        {
+            echo (json_encode([
+                'status' => false,
+                'message' => 'Fallo el envio del correo'
+            ]));
+        }
     }
     else
     {
         echo (json_encode([
             'status' => false,
-            'message' => 'Fallo el envio del correo'
-        ]));
+            'message' => 'El correo es invalido'
+        ])); 
     }
 }
 else
 {
     echo (json_encode([
         'status' => false,
-        'message' => 'El correo es invalido'
+        'message' => 'Este link ya fue usado'
     ])); 
 }
