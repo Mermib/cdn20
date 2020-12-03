@@ -12,8 +12,8 @@ require_once(__DIR__ . '/Includes/Bd/Consultas.php');
 function LinkIsUsed($link)
 {
     $query = parse_url($link, PHP_URL_QUERY);
-    parse_str($query);
-    $notUsed = Bd::getBuy($id);
+    parse_str($query, $output);
+    $notUsed = Bd::getBuy($output['id']);
     return $notUsed;
 }
 
