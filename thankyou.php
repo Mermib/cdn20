@@ -14,21 +14,12 @@ if(isset($_GET['paymentId']) && isset($_GET['PayerID']))
     $code = Paypal::ExecutePayment($paymentId, $payerId);
 }
 
-if(empty($code))
-{
-    header('Location: http://new.cdn20.com/error.html');
-}
-else
+$refused = $code == 'INSTRUMENT_DECLINED' || $code == 'TRANSACTION_REFUSED' || empty($code);
+
+if(!$refused)
 {
     $save = Bd::saveData($code);
-    if($save)
-    {
-        $temporalUrl = sprintf('http://new.cdn20.com/download.php?id=%s', Bd::getUrl($code));
-    }
-    else
-    {
-        header('Location: http://new.cdn20.com/error.html');
-    }
+    $temporalUrl = sprintf('http://new.cdn20.com/download.php?id=%s', Bd::getUrl($code));
 }
 ?>
 
@@ -66,7 +57,7 @@ else
                 </div>
             </nav>      
         </header>
-        <main>
+        <main <?php echo $refused ? 'style="display: none;' : '' ?>>
             <h1>¡Muchas Gracias!</h1>
 
             <div class="text">
@@ -87,6 +78,11 @@ else
                     </div>
                     <span class="lbl-btn" v-else>Enviar</span>
                 </button>
+            </div>
+        </main>
+        <main <?php echo $refused ? '' : 'style="display: none;' ?>>
+            <div class="text">
+                <p>La transaccion fue rechazada, no se realizo el pago.</p>         
             </div>
         </main>
         <footer>
