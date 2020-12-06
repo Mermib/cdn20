@@ -147,6 +147,7 @@
                             .then((response) => {
                                 if(response.data.status){
                                     window.location.href = response.data.message;
+                                    this.spinner = false;
                                 }
                                 else{
                                     alert(response.data.message);

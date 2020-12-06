@@ -50,7 +50,7 @@ Class Bd
         return $ipaddress['ip'];
     }
 
-    public static function saveData($auth)
+    public static function saveData($payment, $merchant)
     {
         $conn = self::Connection();
         $creation = new DateTime();
@@ -58,18 +58,20 @@ Class Bd
         $creation = $creation->format('Y-m-d H:i:s');
         $expiration = $expiration->add(new DateInterval('P0Y0M0DT0H30M'))->format('Y-m-d H:i:s');
         $ip = self::get_client_ip();
-        $query = "INSERT INTO download_links(authorization, creation_date, expiration_date, client_ip, guid) values(?, '$creation', '$expiration', '$ip', UUID())";
+        $query = "INSERT INTO download_links(payment_id, merchant_order_id, creation_date, expiration_date, client_ip, guid) values(?, ?, '$creation', '$expiration', '$ip', UUID())";
         $response = $conn->prepare($query);
-        $response->bindParam(1, $auth);
+        $response->bindParam(1, $payment);
+        $response->bindParam(2, $merchant);
         return $response->execute();
     }
 
-    public static function getUrl($auth)
+    public static function getUrl($payment, $merchant)
     {
         $conn = self::Connection();
-        $query = "SELECT * FROM download_links WHERE authorization = ?";
+        $query = "SELECT * FROM download_links WHERE payment_id = ? AND merchant_order_id = ?";
         $response = $conn->prepare($query);
-        $response->bindParam(1, $auth);
+        $response->bindParam(1, $payment);
+        $response->bindParam(2, $merchant);
         $response->execute();
         $guid = '';
         

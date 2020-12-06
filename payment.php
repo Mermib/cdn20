@@ -1,9 +1,10 @@
 <?php
 
-require_once(__DIR__ . '/Includes/Paypal/Paypal.php');
+require_once(__DIR__ . '/Includes/vendor/autoload.php');
+require_once(__DIR__ . '/Includes/Config.php');
 
-$json = json_decode(file_get_contents('php://input'), true);
-$price = $json['price'];
+$json = json_decode(file_get_contents('php://input'));
+$price = $json->price;
 
 if(doubleval($price) < 100)
 {
@@ -14,9 +15,28 @@ if(doubleval($price) < 100)
 }
 else
 {
-    $response = Paypal::CreatePayment(doubleval($price));
+    MercadoPago\SDK::setAccessToken(MP_SECRET);
+    $preference = new MercadoPago\Preference();
+    $preference->back_urls = [
+        "success" => 'http://new.cdn20.com/thankyou.php',
+        "failure" => 'http://new.cdn20.com/thankyou.php',
+        "pending" => 'http://new.cdn20.com/thankyou.php'
+    ];
+    $preference->payment_methods = [
+        'excluded_payment_types' => [
+            [ 'id' => 'digital_wallet' ],
+            [ 'id' => 'ticket' ],
+            [ 'id' => 'atm' ]
+        ]
+    ];
+    $item = new MercadoPago\Item();
+    $item->title = 'Disco Musical';
+    $item->quantity = 1;
+    $item->unit_price = $price;
+    $preference->items = [$item];
+    $preference->save();
     echo (json_encode([
         'status' => true,
-        'message' => $response
+        'message' => $preference->init_point
     ]));
 }

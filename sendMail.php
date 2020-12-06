@@ -1,6 +1,7 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 require_once(__DIR__ . '/Includes/PHPMailer/src/Exception.php');
 require_once(__DIR__ . '/Includes/PHPMailer/src/PHPMailer.php');
@@ -9,6 +10,7 @@ require_once(__DIR__ . '/Includes/PHPMailer/src/PHPMailer.php');
 require_once(__DIR__ . '/Includes/Config.php');
 require_once(__DIR__ . '/Includes/Bd/Consultas.php');
 
+/*
 function LinkIsUsed($link)
 {
     $query = parse_url($link, PHP_URL_QUERY);
@@ -80,3 +82,32 @@ else
         'message' => 'Este link ya fue usado'
     ])); 
 }
+*/
+    try
+    {
+        $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->SMTPDebug = 3;
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    //$mail->Mailer = 'smtp'; 
+    $mail->CharSet = 'UTF-8';
+    $mail->IsHTML(true);
+    $mail->SMTPAuth   = true;
+    $mail->SMTPSecure = 'tls';
+    $mail->Port       = 587;
+    $mail->Host       = 'nl2020.mx';
+    $mail->Username   = 'compra@nl2020.mx';
+    $mail->Password   = '+Gel02734*';
+    $mail->AddAddress('daeside123@gmail.com');
+    $mail->SetFrom('compra@nl2020.mx');
+    $mail->Subject = '¡Muchas gracias por su compra!';
+    $mail->Body = '';
+    $mail->MsgHTML('<html><head></head><body><p>Test</p></body></html>');
+    $mail->Send();
+    var_dump($mail);
+   // var_dump($mail);
+    }
+    catch(Exception $e)
+    {
+        var_dump($e);
+    }

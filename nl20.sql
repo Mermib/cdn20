@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2020 a las 06:28:04
+-- Tiempo de generación: 06-12-2020 a las 08:06:12
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.3.22
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `download_links` (
   `id` int(11) NOT NULL,
-  `authorization` varchar(30) NOT NULL,
+  `payment_id` varchar(50) NOT NULL,
+  `merchant_order_id` varchar(50) NOT NULL,
   `creation_date` datetime NOT NULL,
   `expiration_date` datetime NOT NULL,
   `client_ip` varchar(30) NOT NULL,
@@ -41,9 +42,8 @@ CREATE TABLE `download_links` (
 -- Volcado de datos para la tabla `download_links`
 --
 
-INSERT INTO `download_links` (`id`, `authorization`, `creation_date`, `expiration_date`, `client_ip`, `guid`, `used`) VALUES
-(1, '1XG19764BF102810C', '2020-11-27 00:20:00', '2020-11-27 00:25:00', '127.0.0.1', '328835d9-3070-11eb-843c-7c8ae14076e6', 1),
-(2, '2C441452AE441500B', '2020-11-27 00:26:15', '2020-11-27 00:31:15', '127.0.0.1', '11ac8323-3071-11eb-843c-7c8ae14076e6', 1);
+INSERT INTO `download_links` (`id`, `payment_id`, `merchant_order_id`, `creation_date`, `expiration_date`, `client_ip`, `guid`, `used`) VALUES
+(1, '1231737767', '2063575409', '2020-12-06 01:46:03', '2020-12-06 02:16:03', '127.0.0.1', 'b5cc627d-378e-11eb-ac21-7c8ae14076e6', 1);
 
 --
 -- Índices para tablas volcadas
@@ -54,8 +54,7 @@ INSERT INTO `download_links` (`id`, `authorization`, `creation_date`, `expiratio
 --
 ALTER TABLE `download_links`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `guid` (`guid`),
-  ADD UNIQUE KEY `authorization` (`authorization`);
+  ADD UNIQUE KEY `guid` (`guid`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -65,7 +64,7 @@ ALTER TABLE `download_links`
 -- AUTO_INCREMENT de la tabla `download_links`
 --
 ALTER TABLE `download_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
